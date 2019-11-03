@@ -11,7 +11,7 @@ Route::group([
     Route::post('signup', 'AuthController@signup');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
+    Route::get('usuario', 'PersonaController@me');
     Route::post('sendPasswordResetLink', 'ResetPasswordController@sendEmail');
     Route::post('resetPassword', 'ChangePasswordController@process');
 
@@ -21,5 +21,14 @@ Route::group([
     Route::put('persona/{id}', 'PersonaController@update');
     Route::delete('persona/{id}', 'PersonaController@destroy');
 
+    Route::get('paises', 'PaisController@index');
+    Route::post('paises', 'PaisController@create');
+    Route::put('paises/{id}', 'PaisController@update');
+    Route::delete('paises/{id}', 'PaisController@destroy');
+
+    Route::get('departamentos', 'DepartamentoController@index');
+    Route::post('departamentos', 'DepartamentoController@create');
+    Route::put('departamentos/{id}', 'DepartamentoController@update');
+    Route::delete('departamentos/{id}', 'DepartamentoController@destroy');
     
 });

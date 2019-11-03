@@ -16,5 +16,9 @@ Route::get('/', function () {
 });
 Route::get('persona/index',"PersonaController@index");
 Route::get('persona/show/{id}',"PersonaController@show");
+
+Route::get('departamentos', 'DepartamentoController@index');
+Route::get('paises', 'PaisController@index');
+
 Route::get('login/google', 'Auth\LoginController@redirectToProvider');
 Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
