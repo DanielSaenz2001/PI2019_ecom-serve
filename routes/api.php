@@ -30,5 +30,7 @@ Route::group([
     Route::post('departamentos', 'DepartamentoController@create');
     Route::put('departamentos/{id}', 'DepartamentoController@update');
     Route::delete('departamentos/{id}', 'DepartamentoController@destroy');
+
+    Route::delete('upload', 'AuthController@destroy');
     
 });

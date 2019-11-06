@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Persona;
+use App\User;
 use Illuminate\Http\Request;
 
 class PersonaController extends Controller
@@ -51,6 +52,17 @@ class PersonaController extends Controller
     }
     public function me()
     {
-        return response()->json(auth()->user());
+        $result = User::join('personas', 'personaID', '=', 'personas.id')
+        ->join('paises', 'personas.pais', '=', 'paises.id')
+        ->join('departamentos', 'personas.departamento', '=', 'departamentos.id')->where('personaID','=',auth()->user()->id)
+        ->select('users.name as usuario','users.avatar','personas.nombre','personas.ap_materno','users.role',
+        'personas.ap_paterno','personas.dni','personas.celular','personas.dni', 'paises.nombre as pais',
+        'personas.email','personas.fec_nacimiento','personas.est_civil','personas.domicilio_actual','personas.sexo'
+        ,'personas.dependiente','departamentos.nombre as departamentos','personas.id as persona_ID','users.id as user_ID')
+        ->get();
+        return response()->json($result);
+    }
+    public function dependiente(){
+
     }
 }

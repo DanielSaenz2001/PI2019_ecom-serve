@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
 use App\User;
+
+use Illuminate\Http\Request;
+
 
 
 class AuthController extends Controller
@@ -17,7 +19,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'signup','me']]);
+        $this->middleware('auth:api', ['except' => ['login', 'signup','upload']]);
     }
     public function login()
     {
@@ -85,4 +87,20 @@ class AuthController extends Controller
             'user' => auth()->user()->name
         ]);
     }
+
+    public function upload(Request $request){
+    if ($request->hasFile('avatar'))
+    {
+          $file      = $request->file('avatar');
+          $filename  = $file->getClientOriginalName();
+          $extension = $file->getClientOriginalExtension();
+          $picture   = date('His').'-'.$filename;
+          $file->move(public_path('uploads/avatars/'), $picture);
+          return response()->json(["message" => "avatar Uploaded Succesfully"]);
+    } 
+    else
+    {
+          return response()->json(["message" => "Select avatar first."]);
+    }
+  }
 }
