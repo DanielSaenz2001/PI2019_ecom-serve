@@ -62,7 +62,14 @@ class PersonaController extends Controller
         ->get();
         return response()->json($result);
     }
-    public function dependiente(){
+    public function PersonasNull(){
+        $resultado = Persona::join('paises', 'personas.pais', '=', 'paises.id')
+        ->join('departamentos', 'personas.departamento', '=', 'departamentos.id')->where([['personas.dependiente', '=', !null]])
+        ->select('personas.nombre','personas.ap_materno','personas.ap_paterno','personas.dni','personas.celular','personas.dni', 'paises.nombre as pais',
+        'personas.email','personas.fec_nacimiento','personas.est_civil','personas.domicilio_actual','personas.sexo'
+        ,'personas.dependiente','departamentos.nombre as departamentos','personas.id as persona_ID')
+        ->get();
 
+        return response()->json($resultado);     
     }
 }

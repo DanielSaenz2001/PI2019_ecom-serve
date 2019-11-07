@@ -11,12 +11,14 @@ Route::group([
     Route::post('signup', 'AuthController@signup');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
-    Route::get('usuario', 'PersonaController@me');
+    
     Route::post('sendPasswordResetLink', 'ResetPasswordController@sendEmail');
     Route::post('resetPassword', 'ChangePasswordController@process');
 
+    Route::get('usuario', 'PersonaController@me');
     Route::get('persona', 'PersonaController@index');
     Route::get('persona/{id}','PersonaController@show');
+    Route::get('users', 'PersonaController@PersonasNull');
     Route::post('persona', 'PersonaController@create');
     Route::put('persona/{id}', 'PersonaController@update');
     Route::delete('persona/{id}', 'PersonaController@destroy');
